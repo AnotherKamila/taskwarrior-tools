@@ -7,3 +7,4 @@ The bigger (and probably more interesting) taskwarrior tools:
 What is in here:
 
 - `timew2ctt`: Timewarrior extension to export Timewarrior data to [ctt](https://www.nico.schottelius.org/software/ctt/)
+- `current`: Compact, one-line version of info about the current entry (like when you run `timew` without arguments, but compact)

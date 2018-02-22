@@ -2,6 +2,7 @@
 #############################################################################
 # Timewarrior extension to export Timewarrior data to [ctt](https://www.nico.schottelius.org/software/ctt/)
 # Timewarrior extensions docs: https://taskwarrior.org/docs/timewarrior/tutorial.html#extensions
+# Link to ~/.timewarrior/extensions/ctt.py
 #############################################################################
 
 import sys
@@ -63,88 +64,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-# def formatSeconds(seconds):
-#   ''' Convert seconds: 3661
-#       To formatted:    1:01:01
-#   '''
-#   hours   = int(seconds / 3600)
-#   minutes = int(seconds % 3600) / 60
-#   seconds =     seconds % 60
-#   return '%4d:%02d:%02d' % (hours, minutes, seconds)
-
-
-
-# # Extract the configuration settings.
-# header = 1
-# configuration = dict()
-# body = ''
-# for line in sys.stdin:
-#   if header:
-#     if line == '\n':
-#       header = 0
-#     else:
-#       fields = line.strip().split(': ', 2)
-#       if len(fields) == 2:
-#         configuration[fields[0]] = fields[1]
-#       else:
-#         configuration[fields[0]] = ''
-#   else:
-#     body += line
-
-# # Sum the second tracked by tag.
-# totals = dict()
-# j = json.loads(body)
-# for object in j:
-#   start = datetime.datetime.strptime(object['start'], DATEFORMAT)
-
-#   if 'end' in object:
-#     end = datetime.datetime.strptime(object['end'], DATEFORMAT)
-#   else:
-#     end = datetime.datetime.utcnow()
-
-#   tracked = end - start
-
-#   for tag in object['tags']:
-#     if tag in totals:
-#       totals[tag] += tracked
-#     else:
-#       totals[tag] = tracked
-
-# # Determine largest tag width.
-# max_width = 0
-# for tag in totals:
-#   if len(tag) > max_width:
-#     max_width = len(tag)
-
-# start = datetime.datetime.strptime(configuration['temp.report.start'], DATEFORMAT)
-# end   = datetime.datetime.strptime(configuration['temp.report.end'],   DATEFORMAT)
-# if max_width > 0:
-#   # Compose report header.
-#   print '\nTotal by Tag, for %s - %s\n' % (start, end)
-
-#   # Compose table header.
-#   if configuration['color'] == 'on':
-#     print '[4m%-*s[0m [4m%10s[0m' % (max_width, 'Tag', 'Total')
-#   else:
-#     print '%-*s %10s' % (max_width, 'Tag', 'Total')
-#     print '-' * max_width, '----------'
-
-#   # Compose table rows.
-#   grand_total = 0
-#   for tag in sorted(totals):
-#     formatted = formatSeconds(totals[tag].seconds)
-#     grand_total += totals[tag].seconds
-#     print '%-*s %10s' % (max_width, tag, formatted)
-
-#   # Compose total.
-#   if configuration['color'] == 'on':
-#     print ' ' * max_width, '[4m          [0m'
-#   else:
-#     print ' ' * max_width, '----------'
-
-#   print '%-*s %10s' % (max_width, 'Total', formatSeconds(grand_total))
-
-# else:
-#   print 'No data in the range %s - %s' % (start, end)
-
